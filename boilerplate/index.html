@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Input Test</title>
+    <meta name="description" content="Aframe-Material">
+    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/zcanter/aframe-gradient-sky/master/dist/gradientsky.min.js"></script>
+    <script src="group-opacity.js"></script>
+    <script src="aframe-material.js"></script>
+    <script type="text/javascript">
+      AFRAME.ASSETS_PATH = "./assets";
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="comments" crossorigin="anonymous" src="https://cdn.glitch.com/41a86b23-2dc4-4ad2-8cc5-b11c9ddebf52%2FText.jpg?1506156415133">
+      </a-assets>
+
+      <a-entity id="cameraRig">
+        <a-camera look-controls wasd-controls mouse-cursor position="0.358 1.6 2.145"></a-camera>
+        <a-entity laser-controls="hand: right"></a-entity>
+      </a-entity>
+
+      <!-- BEGIN INPUTS/KEYBOARD -->
+      <a-link href="index.html" title="2" image="#homeThumbnail" position="-0.5 2.8 -0.7" scale="0.5 0.5 1" geometry="primitive:circle;segments:64" material="shader:portal;side:double"></a-link>
+      <a-entity id="otherLinks">
+        <a-link href="index.html" title="1" image="#homeThumbnail" position="-2 2.8 -0.7" scale="0.5 0.5 1" geometry="primitive:circle;segments:64" material="shader:portal;side:double"></a-link>
+        <a-link href="index.html" title="3" image="#homeThumbnail" position="1 2.8 -0.7" scale="0.5 0.5 1" geometry="primitive:circle;segments:64" material="shader:portal;side:double"></a-link>
+      </a-entity>
+      <a-button onClick="toggle()" id="commentToggle" position="-1.4 3.25 -0.7" scale="0.5 0.5 1" name="ToggleComment" value="Toggle" type="raised" width="0.4" button="buttonColor:#94120c"></a-button>
+      <a-form id="thread" position="-0.8 1.1 -0.7" rotation="0 0 0" visible="false">
+        <a-plane src="#comments"
+                 position="1.3 1.7 0"
+                 width=".8"
+                 height="1"
+                 rotation=""></a-plane>
+        <a-keyboard position="-0.7 0.2 0.5"></a-keyboard>
+        <a-input position="-0.15 1 0" placeholder="Write a comment..." color="black" width="1.85"></a-input>
+        <a-button position="1.25 1 0" scale="0.5 0.5 1" name="Submit" value="Submit" type="raised" width="0.65" button="buttonColor:#128d50"></a-button>
+        <a-button position="0.76 1 0" scale="0.5 0.5 1" name="mic" value="VOICE" type="raised" width="0.8"></a-button>
+      </a-form>
+      <!-- END INPUTS/KEYBOARD -->
+
+
+      <!-- BEGIN ENVIRONEMENT -->
+      <a-gradient-sky material="shader: gradient; topColor: 255 0 0; bottomColor: 0 121 255;"></a-gradient-sky>
+      <!-- END ENVIRONEMENT -->
+    </a-scene>
+
+    <script type="text/javascript">
+        function toggle()
+        {
+            var thread = document.querySelector('#thread');
+            var otherLinks = document.querySelector('#otherLinks');
+            if (thread.getAttribute('visible')) {
+                thread.setAttribute('visible', "false");
+                otherLinks.setAttribute('visible', "true");
+            } else {
+                thread.setAttribute('visible', "true");
+                otherLinks.setAttribute('visible', "false");
+            }
+        }
+    </script>
+  </body>
+</html>
